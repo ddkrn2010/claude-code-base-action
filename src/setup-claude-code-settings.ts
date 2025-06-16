@@ -23,10 +23,13 @@ export async function setupClaudeCodeSettings() {
     }
 
     const credentials = {
-      access_token: accessToken,
-      refresh_token: refreshToken,
-      expires_at: parseInt(expiresAt),
-      token_type: "bearer"
+      claudeAiOauth: {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        expiresAt: parseInt(expiresAt),
+        scopes: ["user:inference", "user:profile"],
+        isMax: true
+      }
     };
 
     console.log(`Setting up OAuth credentials...`);
