@@ -1,3 +1,4 @@
+# Updated to force cache refresh
 name: "Claude Code Base Action"
 description: "Run Claude Code in GitHub Actions workflows"
 branding:
