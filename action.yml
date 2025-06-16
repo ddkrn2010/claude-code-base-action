@@ -69,6 +69,19 @@ inputs:
     description: "Use Google Vertex AI with OIDC authentication instead of direct Anthropic API"
     required: false
     default: "false"
+  use_oauth:
+    description: "Use OAuth authentication instead of API key"
+    required: false
+    default: "false"
+  claude_access_token:
+    description: "Claude OAuth access token"
+    required: false
+  claude_refresh_token:
+    description: "Claude OAuth refresh token"
+    required: false
+  claude_expires_at:
+    description: "Claude OAuth token expiration timestamp"
+    required: false
 
   use_node_cache:
     description: "Whether to use Node.js dependency caching (set to true only for Node.js projects with lock files)"
@@ -131,6 +144,12 @@ runs:
         INPUT_APPEND_SYSTEM_PROMPT: ${{ inputs.append_system_prompt }}
         INPUT_TIMEOUT_MINUTES: ${{ inputs.timeout_minutes }}
         INPUT_CLAUDE_ENV: ${{ inputs.claude_env }}
+        
+        # OAuth configuration
+        INPUT_USE_OAUTH: ${{ inputs.use_oauth }}
+        INPUT_CLAUDE_ACCESS_TOKEN: ${{ inputs.claude_access_token }}
+        INPUT_CLAUDE_REFRESH_TOKEN: ${{ inputs.claude_refresh_token }}
+        INPUT_CLAUDE_EXPIRES_AT: ${{ inputs.claude_expires_at }}
 
         # Provider configuration
         ANTHROPIC_API_KEY: ${{ inputs.anthropic_api_key }}

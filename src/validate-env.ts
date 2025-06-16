@@ -5,6 +5,7 @@
 export function validateEnvironmentVariables() {
   const useBedrock = process.env.CLAUDE_CODE_USE_BEDROCK === "1";
   const useVertex = process.env.CLAUDE_CODE_USE_VERTEX === "1";
+  const useOAuth = process.env.INPUT_USE_OAUTH === "true";
   const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
 
   const errors: string[] = [];
@@ -16,7 +17,10 @@ export function validateEnvironmentVariables() {
   }
 
   if (!useBedrock && !useVertex) {
-    if (!anthropicApiKey) {
+    if (useOAuth) {
+      // OAuth認証の場合は後でcredentialsを設定するのでここではスキップ
+      console.log("Using OAuth authentication, skipping API key validation");
+    } else if (!anthropicApiKey) {
       errors.push(
         "ANTHROPIC_API_KEY is required when using direct Anthropic API.",
       );
